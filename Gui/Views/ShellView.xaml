@@ -1,0 +1,155 @@
+﻿<Window x:Class="Task4.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task4.Views"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Uppgift 4" Height="700" Width="1300" FontSize="15" FontFamily="Microsoft YaHei">
+    <Window.Resources>
+        <!-- Style -->
+        <Style x:Key="BasicStyle" TargetType="ContentControl">
+            <Setter Property="Height" Value="30" />
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button"
+           BasedOn="{StaticResource BasicStyle}">
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Foreground" Value="LightGray" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <!--Column 1-->
+        <ListBox SelectedItem="{Binding SelectedLesson, Mode=OneWayToSource}" x:Name="Lesson" Grid.Row="1" Grid.Column="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0},  {1},  {2}">
+                                    <Binding Path="Kurs"/>
+                                    <Binding Path="Lärare"/>
+                                    <Binding Path="PStartTid"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--Column 2-->
+        <StackPanel Grid.Column="2" Grid.Row="1" MaxWidth="500">
+            <StackPanel >
+                <Label Content="Information"/>
+                <TextBlock FontWeight="Bold" Text="Kurs"/>
+                <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" x:Name="SelectedLesson_Kurs"/>
+
+                <TextBlock FontWeight="Bold" Text="Grupp"/>
+                <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" x:Name="SelectedLesson_Grupp"/>
+
+                <TextBlock FontWeight="Bold" Text="Moment"/>
+                <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" x:Name="SelectedLesson_Moment"/>
+
+                <TextBlock FontWeight="Bold" Text="Lärare"/>
+                <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" x:Name="SelectedLesson_Lärare"/>
+
+                <TextBlock FontWeight="Bold" Text="Lokal"/>
+                <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" x:Name="SelectedLesson_Lokal"/>
+
+                <TextBlock FontWeight="Bold" Text="Information"/>
+                <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" x:Name="SelectedLesson_Information"/>
+
+                <TextBlock FontWeight="Bold" Text="StartTid"/>
+                <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" x:Name="SelectedLesson_PStartTid"/>
+
+                <TextBlock FontWeight="Bold" Text="SlutTid"/>
+                <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" x:Name="SelectedLesson_PSlutTid"/>
+
+                <TextBlock FontWeight="Bold" Text="Bild"/>
+                <Image Width="150" x:Name="SelectedLesson_BildPath"/>
+            </StackPanel>
+            <StackPanel Margin="0,20,0,0">
+                <TextBlock>Sök efter lärare</TextBlock>
+                <TextBox x:Name="Search"></TextBox>
+                <Button Style="{StaticResource ButtonStyle}" Margin="20 20 20 10" Content="Sök" x:Name="SearchLesson"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!--Column 3-->
+        <StackPanel Grid.Column="3" Grid.Row="1" Margin="20 0 0 0" >
+            <Label>Lägg till</Label>
+            <TextBlock>Kurs</TextBlock>
+            <TextBox x:Name="Kurs"/>
+            <TextBlock>Grupp</TextBlock>
+            <TextBox x:Name="Grupp"/>
+            <TextBlock>Moment</TextBlock>
+            <TextBox x:Name="Moment"/>
+            <TextBlock>Lärare</TextBlock>
+            <TextBox x:Name="Lärare"/>
+            <TextBlock>Lokal</TextBlock>
+            <TextBox x:Name="Lokal"/>
+            <TextBlock>Information</TextBlock>
+            <TextBox x:Name="Information"/>
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Start Datum</TextBlock>
+                <TextBlock Margin="85,0,0,0">Start Tid</TextBlock>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="150" x:Name="StartDatum"></TextBox>
+                <TextBox Margin="10,0,0,0" Width="150" x:Name="StartTid" ></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Slut Datum</TextBlock>
+                <TextBlock Margin="90,0,0,0">Slut Tid</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="150" x:Name="SlutDatum"></TextBox>
+                <TextBox Margin="10,0,0,0" Width="150" x:Name="SlutTid"></TextBox>
+            </StackPanel>
+
+            <TextBlock>Bild</TextBlock>
+            <TextBox x:Name="Bild"/>
+            <Button  x:Name="AddLesson" Content="Lägg till Lektion" Margin="20 10 20 0"/>
+            <Button Style="{StaticResource ButtonStyle}" Margin="20 20 20 10" Content="Get all" x:Name="GetLesson"/>
+            <Button Style="{StaticResource ButtonStyle}" Margin="20 10 20 10" x:Name="DeleteLesson" Content="Ta bort"/>
+            <Button Style="{StaticResource ButtonStyle}" Margin="20 10 20 10" x:Name="UpdateLesson" Content="Redigera"/>
+        </StackPanel>
+        <Button Style="{StaticResource ButtonStyle}" Content="Rensa" x:Name="ClearList" Grid.Column="3" Grid.Row="2"/>
+    </Grid>
+</Window>
+    
